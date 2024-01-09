@@ -34,7 +34,7 @@ setup(
         ],
     extras_require={
         'all': [
-            "hmr2 @ git+https://github.com/shubham-goel/4D-Humans.git",
+            "hmr2 @ git+https://github.com/AmazeVR/4D-Humans.git@feature/python3.8",
         ],
         'blur': [
             'facenet_pytorch'

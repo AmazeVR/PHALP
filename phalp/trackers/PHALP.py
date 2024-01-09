@@ -678,7 +678,8 @@ class PHALP(nn.Module):
             "ava_labels.pkl"           : ["https://people.eecs.berkeley.edu/~jathushan/projects/phalp/ava/ava_labels.pkl", os.path.join(CACHE_DIR, "phalp/ava")],
             "ava_class_mapping.pkl"   : ["https://people.eecs.berkeley.edu/~jathushan/projects/phalp/ava/ava_class_mappping.pkl", os.path.join(CACHE_DIR, "phalp/ava")],
     
-        } | additional_urls # type: ignore
+        }
+        download_files.update(additional_urls) # type: ignore
         
         for file_name, url in download_files.items():
             if not os.path.exists(os.path.join(url[1], file_name)):
