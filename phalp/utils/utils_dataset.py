@@ -82,5 +82,6 @@ def generate_image_patch(cvimg, c_x, c_y, bb_width, bb_height, patch_width, patc
     trans, trans_inv = gen_trans_from_patch_cv(c_x, c_y, bb_width, bb_height, patch_width, patch_height, scale, rot, inv=False)
 
     img_patch = cv2.warpAffine(img, trans, (int(patch_width), int(patch_height)), flags=cv2.INTER_LINEAR)
+    # cv2.imwrite("/media/AI/Common/Recon3D/v2a/data/aespa_multihuman_test/phalp_outputs_mask_7/patch.png", img_patch)
 
     return img_patch, trans, trans_inv

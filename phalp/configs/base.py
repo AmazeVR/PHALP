@@ -71,8 +71,8 @@ class RenderConfig:
     colors: str = "phalp"
     head_mask: bool = False
     head_mask_path: str = f"{CACHE_DIR}/phalp/3D/head_faces.npy"
-    output_resolution: int = 1440
-    fps: int = 30
+    output_resolution: int = 960
+    fps: int = 60
     blur_faces: bool = False
     show_keypoints: bool = False
 

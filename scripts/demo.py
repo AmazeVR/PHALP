@@ -156,10 +156,10 @@ class HMR2_4dhuman(PHALP):
         ) =  super().get_detections(image, frame_name, t_, additional_data, measurments)
 
         # Pad bounding boxes 
-        pred_bbox_padded = expand_bbox_to_aspect_ratio(pred_bbox, self.cfg.expand_bbox_shape)
+        # pred_bbox_padded = expand_bbox_to_aspect_ratio(pred_bbox, self.cfg.expand_bbox_shape)
 
         return (
-            pred_bbox, pred_bbox_padded, pred_masks, pred_scores, pred_classes,
+            pred_bbox, pred_bbox, pred_masks, pred_scores, pred_classes,
             ground_truth_track_id, ground_truth_annotations
         )
     

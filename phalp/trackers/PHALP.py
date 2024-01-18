@@ -135,6 +135,9 @@ class PHALP(nn.Module):
             os.makedirs(self.cfg.video.output_dir + '/_DEMO', exist_ok=True)  
         except: 
             pass
+
+    def track_seperate(self):
+        pass
         
     def track(self):
         
@@ -244,22 +247,22 @@ class PHALP(nn.Module):
                                 for pkey_ in prediction_keys: final_visuals_dic[frame_name_][pkey_].append(track_data_pred_[pkey_.split('_')[1]][-1])
 
                 ############ save the video ##############
-                if(self.cfg.render.enable and t_>=self.cfg.phalp.n_init):                    
-                    d_ = self.cfg.phalp.n_init+1 if(t_+1==len(list_of_frames)) else 1
-                    for t__ in range(t_, t_+d_):
+                # if(self.cfg.render.enable and t_>=self.cfg.phalp.n_init):                    
+                #     d_ = self.cfg.phalp.n_init+1 if(t_+1==len(list_of_frames)) else 1
+                #     for t__ in range(t_, t_+d_):
 
-                        frame_key = list_of_frames[t__-self.cfg.phalp.n_init]
-                        rendered_, f_size = self.visualizer.render_video(final_visuals_dic[frame_key])      
+                #         frame_key = list_of_frames[t__-self.cfg.phalp.n_init]
+                #         rendered_, f_size = self.visualizer.render_video(final_visuals_dic[frame_key])      
 
-                        # save the rendered frame
-                        self.io_manager.save_video(video_path, rendered_, f_size, t=t__-self.cfg.phalp.n_init)
+                #         # save the rendered frame
+                #         self.io_manager.save_video(video_path, rendered_, f_size, t=t__-self.cfg.phalp.n_init)
 
-                        # delete the frame after rendering it
-                        del final_visuals_dic[frame_key]['frame']
+                #         # delete the frame after rendering it
+                #         del final_visuals_dic[frame_key]['frame']
                         
-                        # delete unnecessary keys
-                        for tkey_ in tmp_keys_:  
-                            del final_visuals_dic[frame_key][tkey_] 
+                #         # delete unnecessary keys
+                #         for tkey_ in tmp_keys_:  
+                #             del final_visuals_dic[frame_key][tkey_] 
 
             joblib.dump(final_visuals_dic, pkl_path, compress=3)
             self.io_manager.close_video()
@@ -362,8 +365,8 @@ class PHALP(nn.Module):
 
         center_pad   = np.array([(bbox_pad[2] + bbox_pad[0])/2, (bbox_pad[3] + bbox_pad[1])/2])
         scale_pad    = np.array([(bbox_pad[2] - bbox_pad[0]), (bbox_pad[3] - bbox_pad[1])])
-        mask_tmp     = process_mask(seg_mask.astype(np.uint8), center_pad, 1.0*np.max(scale_pad))
-        image_tmp    = process_image(image, center_pad, 1.0*np.max(scale_pad))
+        mask_tmp     = process_mask(seg_mask.astype(np.uint8), center_pad, np.max(scale_pad))
+        image_tmp    = process_image(image, center_pad, np.max(scale_pad))
 
         # bbox_        = expand_bbox_to_aspect_ratio(bbox, target_aspect_ratio=(192,256))
         # center_x     = np.array([(bbox_[2] + bbox_[0])/2, (bbox_[3] + bbox_[1])/2])
